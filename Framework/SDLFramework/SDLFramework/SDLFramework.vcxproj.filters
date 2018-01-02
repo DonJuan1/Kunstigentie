@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="AStar">
+      <UniqueIdentifier>{18327525-f56f-4384-9682-2730a73169f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{33ec248c-d2a5-403d-ad1e-fc9c1c3fec43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{e1dad403-a70c-4999-8518-78bf0b2f06b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM">
+      <UniqueIdentifier>{3f7bf03a-7afc-4df5-93fe-9d582e2d7377}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM\Sheep">
+      <UniqueIdentifier>{1776c685-ea59-4e63-b83b-380cb3497167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Base">
+      <UniqueIdentifier>{39afbbfb-405f-4d32-ab2e-4cb9ca917635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM\Base">
+      <UniqueIdentifier>{42d01f78-537e-4341-9a0a-375b0eb9bed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM\MissesJansen">
+      <UniqueIdentifier>{b6705017-cbcb-41a4-98b3-ca987d84d826}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FWApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheep.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SheepWanderState.cpp">
+      <Filter>FSM\Sheep</Filter>
+    </ClCompile>
+    <ClCompile Include="SheepGlobalState.cpp">
+      <Filter>FSM\Sheep</Filter>
+    </ClCompile>
+    <ClCompile Include="MissesJansen.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="MissesJansenWanderState.cpp">
+      <Filter>FSM\MissesJansen</Filter>
+    </ClCompile>
+    <ClCompile Include="SheepThirstyState.cpp">
+      <Filter>FSM\Sheep</Filter>
+    </ClCompile>
+    <ClCompile Include="SheepSleepyState.cpp">
+      <Filter>FSM\Sheep</Filter>
+    </ClCompile>
+    <ClCompile Include="SparseGraph.cpp">
+      <Filter>AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomGenerator.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph_SearchAStar.cpp">
+      <Filter>AStar</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDL2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FWApplication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphNode.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphEdge.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="SparseGraph.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph_SearchAStar.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Heuristic_Euclid.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Sheep.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SheepWanderState.h">
+      <Filter>FSM\Sheep</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntity.h">
+      <Filter>Entities\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>FSM\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>FSM\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SheepGlobalState.h">
+      <Filter>FSM\Sheep</Filter>
+    </ClInclude>
+    <ClInclude Include="MissesJansen.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="MissesJansenWanderState.h">
+      <Filter>FSM\MissesJansen</Filter>
+    </ClInclude>
+    <ClInclude Include="SheepThirstyState.h">
+      <Filter>FSM\Sheep</Filter>
+    </ClInclude>
+    <ClInclude Include="SheepSleepyState.h">
+      <Filter>FSM\Sheep</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomGenerator.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexedPriorityQLow.h">
+      <Filter>AStar</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
