@@ -1,5 +1,6 @@
 #pragma once
 #include "MissesJansen.h"
+#include "MisterJansen.h"
 #include "Sheep.h"
 #include "FWApplication.h"
 
@@ -8,11 +9,13 @@ class StatusBar
 public:
 	StatusBar(int pXPos, int pYPos, int pWidth, int pHeight, Color pBackgroundColor) : xPos(pXPos), yPos(pYPos), width(pWidth), height(pHeight), backgroundColor(pBackgroundColor) {};
 
+	void setMisterJansen(MisterJansen*);
 	void setMissesJansen(MissesJansen*);
 	void setSheep(Sheep*);
 	void draw();
 
 private:
+	MisterJansen * misterJansen = nullptr;
 	MissesJansen* missesJansen = nullptr;
 	Sheep* sheep = nullptr;
 
@@ -22,6 +25,11 @@ private:
 	int height;
 	Color backgroundColor;
 };
+
+inline void StatusBar::setMisterJansen(MisterJansen* pMisterJansen)
+{
+	misterJansen = pMisterJansen;
+}
 
 inline void StatusBar::setMissesJansen(MissesJansen* pMissesJansen)
 {
@@ -60,6 +68,9 @@ void StatusBar::draw()
 		application->DrawText(missesJansen->getFSM()->CurrentState()->name(), xPos + 122, yPos + 164);
 	}
 
-	
-	
+	if (misterJansen)
+	{
+		application->DrawText("Mister Jansen State: ", xPos + 4, yPos + 228);
+		application->DrawText(misterJansen->getFSM()->CurrentState()->name(), xPos + 122, yPos + 228);
+	}
 }

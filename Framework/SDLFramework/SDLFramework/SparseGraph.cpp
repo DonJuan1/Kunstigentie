@@ -32,6 +32,7 @@ SparseGraph::SparseGraph(bool pDigraph) : nextNodeIndex(0), digraph(pDigraph)
 
 SparseGraph::~SparseGraph()
 {
+	delete misterJansen;
 	delete missesJansen;
 	delete sheep;
 }
@@ -143,7 +144,13 @@ bool SparseGraph::Load(std::ifstream& stream)
 				switch (line[i])
 				{
 					case 'X': AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(0, 255, 0, 255))); break;
-					case 'M': AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 0, 255))); break;
+					case 'M':
+					{
+						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 0, 255))); 
+						misterJansen = new MisterJansen(nextNodeIndex - 1, this);
+
+						break;
+					}
 					case 'V':
 					{
 						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 255, 255))); 
@@ -205,12 +212,14 @@ void SparseGraph::draw()
 
 	}
 
+	misterJansen->draw();
 	missesJansen->draw();
 	sheep->draw();
 }
 
 void SparseGraph::update()
 {
+	misterJansen->update();
 	missesJansen->update();
 	sheep->update();
 }

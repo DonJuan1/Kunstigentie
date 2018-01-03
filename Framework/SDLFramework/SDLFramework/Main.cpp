@@ -25,6 +25,7 @@ int main(int args[])
 	graph.Load("graph.txt");
 
 	StatusBar statusBar(1280, 0, 400, 720, Color(245, 245, 255,255));
+	statusBar.setMisterJansen(graph.getMisterJansen());
 	statusBar.setMissesJansen(graph.getMissesJansen());
 	statusBar.setSheep(graph.getSheep());
 

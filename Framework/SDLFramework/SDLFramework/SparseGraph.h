@@ -4,6 +4,7 @@
 #include "GraphEdge.h"
 #include "FWApplication.h"
 #include "MissesJansen.h"
+#include "MisterJansen.h"
 #include "Sheep.h"
 
 #include <vector>
@@ -20,6 +21,7 @@ private:
 	bool digraph;
 	int nextNodeIndex;
 
+	MisterJansen* misterJansen;
 	MissesJansen* missesJansen;
 	Sheep* sheep;
 	  
@@ -83,6 +85,11 @@ public:
 
 	bool Load(const char* FileName);
 	bool Load(std::ifstream& stream);
+
+	MisterJansen* getMisterJansen()
+	{
+		return misterJansen;
+	}
 
 	MissesJansen* getMissesJansen()
 	{

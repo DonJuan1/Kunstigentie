@@ -90,6 +90,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MissesJansen.cpp" />
     <ClCompile Include="MissesJansenWanderState.cpp" />
+    <ClCompile Include="MisterJansen.cpp" />
+    <ClCompile Include="MisterJansenTakePhotoState.cpp" />
+    <ClCompile Include="MisterJansenWanderState.cpp" />
     <ClCompile Include="RandomGenerator.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="SheepGlobalState.cpp" />
@@ -113,6 +116,9 @@
     <ClInclude Include="IndexedPriorityQLow.h" />
     <ClInclude Include="MissesJansen.h" />
     <ClInclude Include="MissesJansenWanderState.h" />
+    <ClInclude Include="MisterJansen.h" />
+    <ClInclude Include="MisterJansenTakePhotoState.h" />
+    <ClInclude Include="MisterJansenWanderState.h" />
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="SheepGlobalState.h" />

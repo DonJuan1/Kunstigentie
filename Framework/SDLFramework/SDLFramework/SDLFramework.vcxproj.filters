@@ -33,6 +33,9 @@
     <Filter Include="FSM\MissesJansen">
       <UniqueIdentifier>{b6705017-cbcb-41a4-98b3-ca987d84d826}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FSM\MisterJansen">
+      <UniqueIdentifier>{43c1d700-3a77-4aa8-a009-d72717c4b842}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -70,6 +73,15 @@
     </ClCompile>
     <ClCompile Include="Graph_SearchAStar.cpp">
       <Filter>AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="MisterJansen.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="MisterJansenWanderState.cpp">
+      <Filter>FSM\MisterJansen</Filter>
+    </ClCompile>
+    <ClCompile Include="MisterJansenTakePhotoState.cpp">
+      <Filter>FSM\MisterJansen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +153,15 @@
     </ClInclude>
     <ClInclude Include="IndexedPriorityQLow.h">
       <Filter>AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="MisterJansen.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="MisterJansenWanderState.h">
+      <Filter>FSM\MisterJansen</Filter>
+    </ClInclude>
+    <ClInclude Include="MisterJansenTakePhotoState.h">
+      <Filter>FSM\MisterJansen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ MissesJansenWanderState* MissesJansenWanderState::instance()
 
 void MissesJansenWanderState::enter(MissesJansen *)
 {
-	
+	time = 0;
 }
 
 void MissesJansenWanderState::execute(MissesJansen * missesJansen)
