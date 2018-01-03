@@ -1,8 +1,9 @@
 #include "MisterJansen.h"
 #include "SparseGraph.h"
 #include "MisterJansenWanderState.h"
+#include "RandomGenerator.h"
 
-MisterJansen::MisterJansen(int nodeIndex, SparseGraph* graph) : BaseEntity(nodeIndex, graph)
+MisterJansen::MisterJansen(int nodeIndex, SparseGraph* graph) : JansenEntity(nodeIndex, graph)
 {
 	stateMachine = new StateMachine<MisterJansen>(this);
 
@@ -17,6 +18,16 @@ MisterJansen::~MisterJansen()
 StateMachine<MisterJansen>* MisterJansen::getFSM() const
 {
 	return stateMachine;
+}
+
+float MisterJansen::giveWater()
+{
+	float waterAmount = RandomGenerator::getInstance().generate(3, 5);
+
+	timesWaterGiven++;
+	waterGiven += waterAmount;
+
+	return waterAmount;
 }
 
 void MisterJansen::update()

@@ -4,6 +4,7 @@
 
 #include "State.h"
 #include "Sheep.h"
+#include "JansenEntity.h"
 
 class SheepThirstyState : public State<Sheep>
 {
@@ -23,7 +24,9 @@ private:
 	SheepThirstyState(const SheepThirstyState&) = delete;
 	SheepThirstyState& operator=(const SheepThirstyState &) = delete;
 
+	JansenEntity* choosenJansen = nullptr;
 	float time = 0;
+
 };
 
 

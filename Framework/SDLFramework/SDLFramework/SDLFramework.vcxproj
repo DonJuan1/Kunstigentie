@@ -114,6 +114,7 @@
     <ClInclude Include="Heuristic_Euclid.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="IndexedPriorityQLow.h" />
+    <ClInclude Include="JansenEntity.h" />
     <ClInclude Include="MissesJansen.h" />
     <ClInclude Include="MissesJansenWanderState.h" />
     <ClInclude Include="MisterJansen.h" />

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "BaseEntity.h"
+#include "JansenEntity.h"
 #include "GraphNode.h"
 #include "StateMachine.h"
 #include "FWApplication.h"
 
 class SparseGraph;
 
-class MisterJansen : public BaseEntity
+class MisterJansen : public JansenEntity
 {
 public:
 	MisterJansen(int nodeIndex, SparseGraph* graph);
@@ -15,6 +15,7 @@ public:
 
 	StateMachine<MisterJansen>* getFSM() const;
 
+	float giveWater() override;
 	void update() override;
 	void draw() override;
 

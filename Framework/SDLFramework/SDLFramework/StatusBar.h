@@ -66,11 +66,20 @@ void StatusBar::draw()
 	{
 		application->DrawText("Misses Jansen State: ", xPos + 4, yPos + 164);
 		application->DrawText(missesJansen->getFSM()->CurrentState()->name(), xPos + 122, yPos + 164);
+		application->DrawText("Misses Jansen average water given: ", xPos + 4, yPos + 180);
+		application->DrawText(std::to_string(missesJansen->getWaterGivenAverage()), xPos + 208, yPos + 180);
+		application->DrawText("Misses Jansen percentage to be choosen: ", xPos + 4, yPos + 196);
+		application->DrawText(std::to_string(missesJansen->getPercentage()).append("%"), xPos + 238, yPos + 196);
+
 	}
 
 	if (misterJansen)
 	{
 		application->DrawText("Mister Jansen State: ", xPos + 4, yPos + 228);
 		application->DrawText(misterJansen->getFSM()->CurrentState()->name(), xPos + 122, yPos + 228);
+		application->DrawText("Mister Jansen average water given: ", xPos + 4, yPos + 244);
+		application->DrawText(std::to_string(misterJansen->getWaterGivenAverage()), xPos + 208, yPos + 244);
+		application->DrawText("Mister Jansen percentage to be choosen: ", xPos + 4, yPos + 260);
+		application->DrawText(std::to_string(misterJansen->getPercentage()).append("%"), xPos + 238, yPos + 260);
 	}
 }

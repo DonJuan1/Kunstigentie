@@ -163,5 +163,8 @@
     <ClInclude Include="MisterJansenTakePhotoState.h">
       <Filter>FSM\MisterJansen</Filter>
     </ClInclude>
+    <ClInclude Include="JansenEntity.h">
+      <Filter>Entities\Base</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
