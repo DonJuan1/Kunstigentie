@@ -39,6 +39,19 @@ public:
 
 	std::vector<GraphEdge>& GetEdgesByNode(int idx);
 	
+	GraphNode* getNodesAtPosition(Vector2D position)
+	{
+		for (auto& node : nodes)
+		{
+			if (node.Pos() == position)
+			{
+				return &node;
+			}
+		}
+
+		return nullptr;
+	}
+
 	std::vector<GraphNode>& getNodes()
 	{
 		return nodes;

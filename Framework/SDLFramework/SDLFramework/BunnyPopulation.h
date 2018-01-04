@@ -11,6 +11,14 @@ class BunnyPopulation
 private:
 	std::vector<Bunny*> bunnies;
 	SparseGraph* graph;
+	int generation = 0;
+	int avarageTimeAlive = 0;
+
+	void generateNew(Bunny& bunny);
+	void createOffspring(Bunny& bunny1, Bunny& bunny2);
+
+	void crossOver(Bunny& newBunny, Bunny& bunny1, Bunny& bunny2);
+	void mutate(Bunny& bunny);
 
 public:
 	BunnyPopulation(SparseGraph*);

@@ -79,5 +79,55 @@ public:
 	{
 		return collisionRadius;
 	}
+
+	float getAttractionToWater() const
+	{
+		return attractionToWater;
+	}
+
+	void setAttractionToWater(float atw)
+	{
+		attractionToWater = atw;
+	}
+
+	float getAttractionToSheep() const
+	{
+		return attractionToScheep;
+	}
+
+	void setAttractionToSheep(float ats)
+	{
+		attractionToScheep = ats;
+	}
+
+	float getSeparation() const
+	{
+		return separation;
+	}
+
+	void setSeparation(float sep)
+	{
+		separation = sep;
+	}
+
+	float getAlignment() const
+	{
+		return alignment;
+	}
+
+	void setAlignment(float ali)
+	{
+		alignment = ali;
+	}
+
+	float getCohesion() const
+	{
+		return cohesion;
+	}
+
+	void setCohesion(float coh)
+	{
+		cohesion = coh;
+	}
 };
 

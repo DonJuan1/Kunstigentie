@@ -20,11 +20,19 @@ public:
 		delete steering;
 	}
 
+	float getTimeAlive()
+	{
+		return timeAlive;
+	}
+
 	void tagNeighborBunnies(std::vector<Bunny*>& entities);
+
 	void draw() override;
 	void update() override;
 
 private:
 	SteeringBehaviors* steering;
+
+	float timeAlive = 0.f;
 };
 

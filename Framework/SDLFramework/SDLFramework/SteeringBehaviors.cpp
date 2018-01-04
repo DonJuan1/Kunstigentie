@@ -62,6 +62,40 @@ Vector2D SteeringBehaviors::Wander()
 	return Seek(target);
 }
 
+Vector2D SteeringBehaviors::NodeAvoidens()
+{
+	std::vector<Vector2D> directions =
+	{
+		{0,   -20}, 
+		{20,  -20},
+		{20,  0},
+		{20,  20}, 
+		{0,   20},
+		{-20, 20},
+		{-20, 0}, 
+		{-20, -20} 
+	};
+
+	int bunnyXPosition = static_cast<int>(bunny->getPosition().x);
+	int bunnyYPosition = static_cast<int>(bunny->getPosition().y);
+	
+	Vector2D bunnyNodePosition = Vector2D(bunnyXPosition - bunnyXPosition % 20, bunnyYPosition - bunnyYPosition % 20);
+
+	Vector2D force;
+
+	for (auto& direction : directions)
+	{
+		Vector2D directionPosition = direction + bunnyNodePosition;
+		GraphNode* node = bunny->getGraph()->getNodesAtPosition(directionPosition);
+		if (node != nullptr && !node->IsWalkable())
+		{
+			force += Free(directionPosition);
+		}
+	}
+
+	return force;
+}
+
 Vector2D SteeringBehaviors::Separation(const std::vector<Bunny*>& neighbors)
 {
 	Vector2D steeringforce;
@@ -137,19 +171,26 @@ Vector2D SteeringBehaviors::Calculate()
 
 	bunny->tagNeighborBunnies(bunny->getGraph()->getBunnyPopulation()->getBunnies());
 	
-	force += Separation(bunny->getGraph()->getBunnyPopulation()->getBunnies());
+	force += Separation(bunny->getGraph()->getBunnyPopulation()->getBunnies()) * bunny->getSeparation();
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 
-	force += Alignment(bunny->getGraph()->getBunnyPopulation()->getBunnies()) * 0.5f;
+	force += Alignment(bunny->getGraph()->getBunnyPopulation()->getBunnies()) * bunny->getAlignment();
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 
-	force += Cohesion(bunny->getGraph()->getBunnyPopulation()->getBunnies());
+	force += Cohesion(bunny->getGraph()->getBunnyPopulation()->getBunnies()) * bunny->getCohesion();
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 
-	force += Vec2DNormalize(Wander()) * 2.f;
+	force += Vec2DNormalize(Wander()) * 2;
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 
-	SteeringForce.Truncate(bunny->MaxForce());
+	force += Seek(bunny->getGraph()->GetNode(bunny->getGraph()->getSheep()->getNodeIndex()).Pos()) * bunny->getAttractionToSheep() * 0.01;
+	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
+
+	force += NodeAvoidens() * bunny->getAttractionToWater();
+	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
+
+	
+
 	return SteeringForce;
 }
 

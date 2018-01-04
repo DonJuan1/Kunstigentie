@@ -1,3 +1,7 @@
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>  
+
 #include <iostream>
 #include "Config.h"
 #include "FWApplication.h"
@@ -7,6 +11,8 @@
 #include "SparseGraph.h"
 #include "StatusBar.h"
 #include <ctime>
+
+
 
 int main(int args[])
 {
@@ -21,33 +27,33 @@ int main(int args[])
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
 	
-	SparseGraph graph{ false };
-	graph.Load("graph.txt");
+	SparseGraph* graph = new SparseGraph{ false };
+	graph->Load("graph.txt");
 
 	StatusBar statusBar(1280, 0, 400, 720, Color(245, 245, 255,255));
-	statusBar.setMisterJansen(graph.getMisterJansen());
-	statusBar.setMissesJansen(graph.getMissesJansen());
-	statusBar.setSheep(graph.getSheep());
+	statusBar.setMisterJansen(graph->getMisterJansen());
+	statusBar.setMissesJansen(graph->getMissesJansen());
+	statusBar.setSheep(graph->getSheep());
 
 	//while (true){}
 	while (application->IsRunning())
 	{
-		application->StartTick();
-
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
 			switch (event.type)
 			{
 				case SDL_QUIT:
+				
 				application->Quit();
 				break;
 			}
 		}
 		
-		graph.update();
+		application->StartTick();
+		graph->update();
 
-		graph.draw();
+		graph->draw();
 		statusBar.draw();
 
 		application->SetColor(Color(0, 0, 0, 255));
@@ -55,5 +61,7 @@ int main(int args[])
 		application->EndTick();
 	}
 		
-	return EXIT_SUCCESS;
+	delete graph;
+
+	return 0;
 }

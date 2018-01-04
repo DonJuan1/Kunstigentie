@@ -24,6 +24,7 @@ public:
 	Vector2D SteeringBehaviors::Free(Vector2D TargetPos);
 	Vector2D SteeringBehaviors::Arrive(Vector2D TargetPos, int speed);
 	Vector2D SteeringBehaviors::Wander();
+	Vector2D SteeringBehaviors::NodeAvoidens();
 
 	Vector2D SteeringBehaviors::Separation(const std::vector<Bunny*>& neighbors);
 	Vector2D SteeringBehaviors::Alignment(const std::vector<Bunny*>& neighbors);
