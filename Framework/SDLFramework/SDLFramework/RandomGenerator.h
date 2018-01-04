@@ -25,7 +25,8 @@ public:
 	RandomGenerator(RandomGenerator const&) = delete;
 	void operator=(RandomGenerator const&) = delete;
 
-	int generate(int min, int max);
+	int generateInt(int min, int max);
+	float generateFloat(float min, float max);
 
 private:
 

@@ -18,7 +18,7 @@ void SheepWanderState::execute(Sheep* sheep)
 	if (time > 250)
 	{
 		auto edges = sheep->getGraph()->GetEdgesByNode(sheep->getNodeIndex());
-		auto edge = edges[RandomGenerator::getInstance().generate(0, edges.size() - 1)];
+		auto edge = edges[RandomGenerator::getInstance().generateInt(0, edges.size() - 1)];
 		sheep->setNodeIndex(edge.To());
 
 		time = 0;

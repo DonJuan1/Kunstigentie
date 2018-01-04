@@ -14,7 +14,7 @@ void SheepThirstyState::enter(Sheep * sheep)
 {
 	if (!choosenJansen)
 	{
-		int randomPercentage = RandomGenerator::getInstance().generate(1, 100);
+		int randomPercentage = RandomGenerator::getInstance().generateInt(1, 100);
 
 		if (randomPercentage > 50)
 		{
@@ -59,7 +59,7 @@ void SheepThirstyState::exit(Sheep* sheep)
 
 	if (missesJansenAverageWaterGiven > 0 && misterJansenAverageWaterGiven > 0)
 	{
-		int randomPercentage = RandomGenerator::getInstance().generate(1, 100);
+		int randomPercentage = RandomGenerator::getInstance().generateInt(1, 100);
 
 		float totalAverageWaterGiven = missesJansenAverageWaterGiven + misterJansenAverageWaterGiven;
 		float missesJansenPercentage = missesJansenAverageWaterGiven / totalAverageWaterGiven * 100.f;

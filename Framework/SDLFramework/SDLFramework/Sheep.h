@@ -1,12 +1,12 @@
 #pragma once
 
-#include "BaseEntity.h"
+#include "GraphEntity.h"
 #include "StateMachine.h"
 #include "FWApplication.h"
 
 class SparseGraph;
 
-class Sheep : public BaseEntity
+class Sheep : public GraphEntity
 {
 public:
 	Sheep(int nodeIndex, SparseGraph* graph);

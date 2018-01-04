@@ -3,7 +3,7 @@
 #include "SheepWanderState.h"
 #include "SheepGlobalState.h"
 
-Sheep::Sheep(int nodeIndex, SparseGraph* graph) : BaseEntity(nodeIndex, graph)
+Sheep::Sheep(int nodeIndex, SparseGraph* graph) : GraphEntity(nodeIndex, graph)
 {
 	stateMachine = new StateMachine<Sheep>(this);
 

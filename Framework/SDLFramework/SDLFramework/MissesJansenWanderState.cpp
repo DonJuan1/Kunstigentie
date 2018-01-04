@@ -19,7 +19,7 @@ void MissesJansenWanderState::execute(MissesJansen * missesJansen)
 	if (time > 500)
 	{
 		auto edges = missesJansen->getGraph()->GetEdgesByNode(missesJansen->getNodeIndex());
-		auto edge = edges[RandomGenerator::getInstance().generate(0, edges.size() - 1)];
+		auto edge = edges[RandomGenerator::getInstance().generateInt(0, edges.size() - 1)];
 		missesJansen->setNodeIndex(edge.To());
 
 		time = 0;

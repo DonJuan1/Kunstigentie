@@ -4,8 +4,8 @@ class GraphEdge
 {
 public:
 	GraphEdge(int from, int to, float cost) : cost(cost), from(from), to(to){}
-	GraphEdge(int from, int to) : cost(1.0), from(from), to(to){}
-	GraphEdge() : cost(20.f), from(-1), to(-1){}
+	GraphEdge(int from, int to) : cost(1.f), from(from), to(to){}
+	GraphEdge() : cost(1.f), from(-1), to(-1){}
 	
 	int From() const
 	{

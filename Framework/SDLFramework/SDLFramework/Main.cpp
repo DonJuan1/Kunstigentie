@@ -50,7 +50,7 @@ int main(int args[])
 		graph.draw();
 		statusBar.draw();
 
-		application->SetColor(Color(0, 0, 255, 255));
+		application->SetColor(Color(0, 0, 0, 255));
 
 		application->EndTick();
 	}

@@ -3,6 +3,7 @@
 #include "GraphNode.h"
 #include "GraphEdge.h"
 #include "FWApplication.h"
+#include "BunnyPopulation.h"
 #include "MissesJansen.h"
 #include "MisterJansen.h"
 #include "Sheep.h"
@@ -21,6 +22,7 @@ private:
 	bool digraph;
 	int nextNodeIndex;
 
+	BunnyPopulation* bunnyPopulation;
 	MisterJansen* misterJansen;
 	MissesJansen* missesJansen;
 	Sheep* sheep;
@@ -90,6 +92,11 @@ public:
 
 	bool Load(const char* FileName);
 	bool Load(std::ifstream& stream);
+
+	BunnyPopulation* getBunnyPopulation()
+	{
+		return bunnyPopulation;
+	}
 
 	MisterJansen* getMisterJansen()
 	{

@@ -1,16 +1,21 @@
 #pragma once
 
-#include "BaseEntity.h"
+#include "GraphEntity.h"
 #include "GraphNode.h"
 #include "StateMachine.h"
 #include "FWApplication.h"
 
 class SparseGraph;
 
-class JansenEntity : public BaseEntity
+class JansenEntity : public GraphEntity
 {
+protected:
+	float waterGiven = 0;
+	float timesWaterGiven = 0;
+	float pecrentage = 50;
+
 public:
-	JansenEntity(int nodeIndex, SparseGraph* graph) : BaseEntity(nodeIndex, graph) {};
+	JansenEntity(int nodeIndex, SparseGraph* graph) : GraphEntity(nodeIndex, graph) {};
 
 	virtual float giveWater() = 0;
 
@@ -36,9 +41,5 @@ public:
 		return pecrentage;
 	}
 
-protected:
-	float waterGiven = 0;
-	float timesWaterGiven = 0;
-	float pecrentage = 50;
 };
 

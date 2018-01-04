@@ -8,7 +8,7 @@ class GraphNode
 
 public:
 	GraphNode() : index(-1){}
-	GraphNode(int pIndex, Vector2D pos, Color pColor) : index(pIndex), position(pos) , color(pColor){}
+	GraphNode(int pIndex, Vector2D pos, Color pColor, bool pIsWalkable) : index(pIndex), position(pos) , color(pColor), isWalkable(pIsWalkable){}
 	
 	int Index() const 
 	{ 
@@ -20,7 +20,7 @@ public:
 		index = newIndex; 
 	};
 
-	Vector2D Pos() const
+	const Vector2D Pos() const
 	{
 		return position;
 	}
@@ -35,6 +35,11 @@ public:
 		isOnShortestPath = is;
 	}
 
+	bool IsWalkable()
+	{
+		return isWalkable;
+	}
+
 	void draw() const
 	{
 		if (isOnShortestPath)
@@ -47,8 +52,6 @@ public:
 			FWApplication::GetInstance()->SetColor(color);
 			FWApplication::GetInstance()->DrawRect((int) position.x, (int) position.y, 20, 20, true);
 		}
-
-		
 	}
 
 private:
@@ -58,5 +61,6 @@ private:
 	Color color;
 
 	bool isOnShortestPath = false;
+	bool isWalkable = false;
 };
 

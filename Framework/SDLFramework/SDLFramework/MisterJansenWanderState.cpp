@@ -27,7 +27,7 @@ void MisterJansenWanderState::execute(MisterJansen * misterJansen)
 	if (time > 500)
 	{
 		auto edges = misterJansen->getGraph()->GetEdgesByNode(misterJansen->getNodeIndex());
-		auto edge = edges[RandomGenerator::getInstance().generate(0, edges.size() - 1)];
+		auto edge = edges[RandomGenerator::getInstance().generateInt(0, edges.size() - 1)];
 		misterJansen->setNodeIndex(edge.To());
 
 		time = 0;

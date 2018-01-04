@@ -330,10 +330,11 @@ uint32_t FWApplication::GetTimeSinceStartedMS() const
 
 uint32_t FWApplication::GetDeltaTime() const
 {
+	std::cout << mDeltaTimeMS << std::endl;
 	return mDeltaTimeMS;
 }
 
-void FWApplication::DrawText(const std::string & message, uint32_t offsetX, uint32_t offsetY)
+void FWApplication::DrawTextt(const std::string & message, uint32_t offsetX, uint32_t offsetY)
 {
 	SDL_Color color = { mColor.r, mColor.g, mColor.b, mColor.a };
 	//SDL_Color bgColor = { mTextBackgroundColor.r, mTextBackgroundColor.g, mTextBackgroundColor.b, mTextBackgroundColor.a };

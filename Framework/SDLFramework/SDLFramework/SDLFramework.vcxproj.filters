@@ -36,6 +36,12 @@
     <Filter Include="FSM\MisterJansen">
       <UniqueIdentifier>{43c1d700-3a77-4aa8-a009-d72717c4b842}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ForceDriven">
+      <UniqueIdentifier>{0f9ef1d0-e7a2-4cca-8a46-c5a63076005a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Genetic">
+      <UniqueIdentifier>{83fbb1ae-8265-4529-9e8a-7e0afbb7c635}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -82,6 +88,18 @@
     </ClCompile>
     <ClCompile Include="MisterJansenTakePhotoState.cpp">
       <Filter>FSM\MisterJansen</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2d.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviors.cpp">
+      <Filter>ForceDriven</Filter>
+    </ClCompile>
+    <ClCompile Include="Bunny.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="BunnyPopulation.cpp">
+      <Filter>Genetic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +183,21 @@
     </ClInclude>
     <ClInclude Include="JansenEntity.h">
       <Filter>Entities\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviors.h">
+      <Filter>ForceDriven</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingEntity.h">
+      <Filter>Entities\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Bunny.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphEntity.h">
+      <Filter>Entities\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BunnyPopulation.h">
+      <Filter>Genetic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

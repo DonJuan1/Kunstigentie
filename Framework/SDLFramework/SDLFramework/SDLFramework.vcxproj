@@ -85,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bunny.cpp" />
+    <ClCompile Include="BunnyPopulation.cpp" />
     <ClCompile Include="FWApplication.cpp" />
     <ClCompile Include="Graph_SearchAStar.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -100,15 +102,20 @@
     <ClCompile Include="SheepThirstyState.cpp" />
     <ClCompile Include="SheepWanderState.cpp" />
     <ClCompile Include="SparseGraph.cpp" />
+    <ClCompile Include="SteeringBehaviors.cpp" />
+    <ClCompile Include="Vector2d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseEntity.h" />
+    <ClInclude Include="Bunny.h" />
+    <ClInclude Include="BunnyPopulation.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="FWApplication.h" />
     <ClInclude Include="GraphEdge.h" />
+    <ClInclude Include="GraphEntity.h" />
     <ClInclude Include="GraphNode.h" />
     <ClInclude Include="Graph_SearchAStar.h" />
     <ClInclude Include="Heuristic_Euclid.h" />
@@ -120,6 +127,7 @@
     <ClInclude Include="MisterJansen.h" />
     <ClInclude Include="MisterJansenTakePhotoState.h" />
     <ClInclude Include="MisterJansenWanderState.h" />
+    <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="SheepGlobalState.h" />
@@ -130,6 +138,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StatusBar.h" />
+    <ClInclude Include="SteeringBehaviors.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

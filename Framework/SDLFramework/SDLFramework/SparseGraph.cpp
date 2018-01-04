@@ -1,37 +1,11 @@
 #include "SparseGraph.h"
 
-bool SparseGraph::isNodePresent(int nd)const
-{
-	if ((nodes[nd].Index() == -1) || (nd >= nodes.size()))
-	{
-		return false;
-	}
-
-	return true;
-}
-
-bool SparseGraph::isEdgePresent(int from, int to) const
-{
-	if (isNodePresent(from) && isNodePresent(from))
-	{
-		for (auto& curEdge : edges)
-		{
-			for (auto& edge : curEdge)
-			{
-				if (edge.To() == to)
-					return true;
-			}
-		}
-	}
-
-	return false;
-}
-
 SparseGraph::SparseGraph(bool pDigraph) : nextNodeIndex(0), digraph(pDigraph)
 {}
 
 SparseGraph::~SparseGraph()
 {
+	delete bunnyPopulation;
 	delete misterJansen;
 	delete missesJansen;
 	delete sheep;
@@ -110,6 +84,33 @@ void SparseGraph::AddEdge(GraphEdge edge)
 	}
 }
 
+bool SparseGraph::isNodePresent(int nd)const
+{
+	if ((nodes[nd].Index() == -1) || (nd >= (int)nodes.size()))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool SparseGraph::isEdgePresent(int from, int to) const
+{
+	if (isNodePresent(from) && isNodePresent(from))
+	{
+		for (auto& curEdge : edges)
+		{
+			for (auto& edge : curEdge)
+			{
+				if (edge.To() == to)
+					return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 bool SparseGraph::Load(const char* FileName)
 {
 	std::ifstream in(FileName);
@@ -137,57 +138,60 @@ bool SparseGraph::Load(std::ifstream& stream)
 
 	do
 	{
-		for (int i = 0; i < line.length(); i++)
+		for (size_t i = 0; i < line.length(); i++)
 		{
 			if (line[i] != '~')
 			{
 				switch (line[i])
 				{
-					case 'X': AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(0, 255, 0, 255))); break;
+					case 'X': AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(0, 255, 0, 255), true)); break;
 					case 'M':
 					{
-						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 0, 255))); 
+						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 0, 255), true));
 						misterJansen = new MisterJansen(nextNodeIndex - 1, this);
 
 						break;
 					}
 					case 'V':
 					{
-						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 255, 255))); 
+						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(255, 0, 255, 255), true));
 						missesJansen = new MissesJansen(nextNodeIndex - 1, this);
 
 						break;
 					}
 					case 'O':
 					{
-						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(125, 125, 125, 255)));
+						AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(125, 125, 125, 255), true));
 						sheep = new Sheep(nextNodeIndex - 1, this);
 						
 						break;
 					}
-					default: AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(0, 0, 0, 255))); break;
 				}
 
 				if (indexes[i] != -1)
 				{
-					AddEdge(GraphEdge(nextNodeIndex - 1, indexes[i]));
+					AddEdge(GraphEdge(nextNodeIndex - 1, indexes[i], 20.f));
 				}
 
 				if (i != 0 && indexes[i - 1] != -1)
 				{
-					AddEdge(GraphEdge(nextNodeIndex - 1, indexes[i - 1]));
+					AddEdge(GraphEdge(nextNodeIndex - 1, indexes[i - 1], 20.f));
 				}
 
 				indexes[i] = nextNodeIndex - 1;
 			}
 			else
 			{
+				AddNode(GraphNode(nextNodeIndex, Vector2D(i * 20, rows * 20), Color(0, 0, 255, 255), false));
 				indexes[i] = -1;
 			}
 		}
 
 		rows++;
 	} while (std::getline(stream, line));
+
+	bunnyPopulation = new BunnyPopulation(this);
+	bunnyPopulation->generatePopulation();
 
 	return true;
 }
@@ -215,6 +219,7 @@ void SparseGraph::draw()
 	misterJansen->draw();
 	missesJansen->draw();
 	sheep->draw();
+	bunnyPopulation->draw();
 }
 
 void SparseGraph::update()
@@ -222,4 +227,5 @@ void SparseGraph::update()
 	misterJansen->update();
 	missesJansen->update();
 	sheep->update();
+	bunnyPopulation->update();
 }

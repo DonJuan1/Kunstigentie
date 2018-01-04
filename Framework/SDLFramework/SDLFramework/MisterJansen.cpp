@@ -22,7 +22,7 @@ StateMachine<MisterJansen>* MisterJansen::getFSM() const
 
 float MisterJansen::giveWater()
 {
-	float waterAmount = RandomGenerator::getInstance().generate(3, 5);
+	float waterAmount = RandomGenerator::getInstance().generateInt(3, 5);
 
 	timesWaterGiven++;
 	waterGiven += waterAmount;
@@ -38,6 +38,6 @@ void MisterJansen::update()
 void MisterJansen::draw()
 {
 	auto position = getGraph()->GetNode(getNodeIndex()).Pos();
-	FWApplication::GetInstance()->SetColor(Color(128, 0, 0, 255));
+	FWApplication::GetInstance()->SetColor(Color(192, 0, 0, 255));
 	FWApplication::GetInstance()->DrawRect(position.x + 5, position.y + 5, 10, 10, true);
 }

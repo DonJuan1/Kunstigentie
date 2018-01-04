@@ -34,12 +34,13 @@ void Graph_SearchAStar::Search()
 				pq.insert(pE.To());
 				m_SearchFrontier[pE.To()] = &pE;
 			}
-			else if ((GCost < m_GCosts[pE.To()]))
+			else if (GCost < m_GCosts[pE.To()])
 			{
 				m_FCosts[pE.To()] = GCost + HCost;
 				m_GCosts[pE.To()] = GCost;
-				pq.ChangePriority(pE.To());
 				m_SearchFrontier[pE.To()] = &pE;
+				pq.ChangePriority(pE.To());
+				
 			}
 		}
 	}

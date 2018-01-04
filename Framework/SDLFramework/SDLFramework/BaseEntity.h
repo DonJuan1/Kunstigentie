@@ -1,11 +1,19 @@
 #pragma once
 
+#include "Vector2D.h"
+
 class SparseGraph;
 
 class BaseEntity
 {
+
+protected:
+	SparseGraph * graph;
+	Vector2D position;
+	float visibilityRadius = 30;
+
 public:
-	BaseEntity(int pNodeIndex, SparseGraph* pGraph) : nodeIndex(pNodeIndex), graph(pGraph) {}
+	BaseEntity(SparseGraph* pGraph) : graph(pGraph) {}
 	virtual ~BaseEntity(){}
 	
 	virtual void update() = 0;
@@ -16,19 +24,20 @@ public:
 		return graph;
 	}
 
-	int getNodeIndex() const
+	void setPosition(Vector2D newPos)
 	{
-		return nodeIndex;
+		position = newPos;
 	}
 
-	void setNodeIndex(int index)
+	Vector2D getPosition() const
 	{
-		nodeIndex = index;
+		return position;
 	}
 
-private:
-	SparseGraph* graph;
-	int nodeIndex;
+	float getVisibilityRadius() const
+	{
+		return visibilityRadius;
+	}
 };
 
 

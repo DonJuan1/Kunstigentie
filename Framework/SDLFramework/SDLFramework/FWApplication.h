@@ -136,7 +136,7 @@ public:
 	/// <param name="offsetX">	The offset x coordinate. </param>
 	/// <param name="offsetY">	The offset y coordinate. </param>
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	void DrawText(const std::string & message, uint32_t offsetX, uint32_t offsetY);
+	void DrawTextt(const std::string & message, uint32_t offsetX, uint32_t offsetY);
 
 
 
