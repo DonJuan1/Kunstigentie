@@ -12,34 +12,10 @@ SheepThirstyState* SheepThirstyState::instance()
 
 void SheepThirstyState::enter(Sheep * sheep)
 {
-	float missesJansenAverageWaterGiven = sheep->getGraph()->getMissesJansen()->getWaterGivenAverage();
-	float misterJansenAverageWaterGiven = sheep->getGraph()->getMisterJansen()->getWaterGivenAverage();
-
-	int randomPercentage = RandomGenerator::getInstance().generate(1, 100);
-
-	if (missesJansenAverageWaterGiven > 0 && misterJansenAverageWaterGiven > 0)
+	if (!choosenJansen)
 	{
-		float totalAverageWaterGiven = missesJansenAverageWaterGiven + misterJansenAverageWaterGiven;
-		float missesJansenPercentage = missesJansenAverageWaterGiven / totalAverageWaterGiven * 100.f;
-		float misterJansenPercentage = misterJansenAverageWaterGiven / totalAverageWaterGiven * 100.f;
+		int randomPercentage = RandomGenerator::getInstance().generate(1, 100);
 
-		sheep->getGraph()->getMissesJansen()->setPercentage(missesJansenPercentage);
-		sheep->getGraph()->getMisterJansen()->setPercentage(misterJansenPercentage);
-
-		if (randomPercentage < missesJansenPercentage)
-		{
-			choosenJansen = sheep->getGraph()->getMissesJansen();
-			
-		}
-		else
-		{
-			choosenJansen = sheep->getGraph()->getMisterJansen();
-			
-		}
-
-	}
-	else
-	{
 		if (randomPercentage > 50)
 		{
 			choosenJansen = sheep->getGraph()->getMissesJansen();
@@ -76,9 +52,39 @@ void SheepThirstyState::execute(Sheep * sheep)
 	}
 }
 
-void SheepThirstyState::exit(Sheep *)
+void SheepThirstyState::exit(Sheep* sheep)
 {
+	float missesJansenAverageWaterGiven = sheep->getGraph()->getMissesJansen()->getWaterGivenAverage();
+	float misterJansenAverageWaterGiven = sheep->getGraph()->getMisterJansen()->getWaterGivenAverage();
 
+	if (missesJansenAverageWaterGiven > 0 && misterJansenAverageWaterGiven > 0)
+	{
+		int randomPercentage = RandomGenerator::getInstance().generate(1, 100);
+
+		float totalAverageWaterGiven = missesJansenAverageWaterGiven + misterJansenAverageWaterGiven;
+		float missesJansenPercentage = missesJansenAverageWaterGiven / totalAverageWaterGiven * 100.f;
+		float misterJansenPercentage = misterJansenAverageWaterGiven / totalAverageWaterGiven * 100.f;
+
+		sheep->getGraph()->getMissesJansen()->setPercentage(missesJansenPercentage);
+		sheep->getGraph()->getMisterJansen()->setPercentage(misterJansenPercentage);
+
+		if (randomPercentage < missesJansenPercentage)
+		{
+			choosenJansen = sheep->getGraph()->getMissesJansen();
+
+		}
+		else
+		{
+			choosenJansen = sheep->getGraph()->getMisterJansen();
+
+		}
+
+		return;
+	}
+	else
+	{
+		choosenJansen = nullptr;
+	}
 }
 
 std::string SheepThirstyState::name()

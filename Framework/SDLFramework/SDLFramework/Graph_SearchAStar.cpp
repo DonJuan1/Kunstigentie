@@ -3,6 +3,11 @@
 
 void Graph_SearchAStar::Search()
 {
+	for (auto& node : graph.getNodes())
+	{
+		node.SetIsOnShortestPath(false);
+	}
+
 	IndexedPriorityQLow<double> pq(m_FCosts, graph.NumNodes());
 
 	pq.insert(m_iSource);
@@ -29,7 +34,7 @@ void Graph_SearchAStar::Search()
 				pq.insert(pE.To());
 				m_SearchFrontier[pE.To()] = &pE;
 			}
-			else if ((GCost < m_GCosts[pE.To()]) && (m_ShortestPathTree[pE.To()] == nullptr))
+			else if ((GCost < m_GCosts[pE.To()]))
 			{
 				m_FCosts[pE.To()] = GCost + HCost;
 				m_GCosts[pE.To()] = GCost;
@@ -42,6 +47,11 @@ void Graph_SearchAStar::Search()
 
 std::list<int> Graph_SearchAStar::GetPathToTarget()const
 {
+	for (auto& node : graph.getNodes())
+	{
+		node.SetIsOnShortestPath(false);
+	}
+
 	std::list<int> path;
 
 	if (m_iTarget < 0)  return path;
@@ -56,10 +66,15 @@ std::list<int> Graph_SearchAStar::GetPathToTarget()const
 		nd = m_ShortestPathTree[nd]->From();
 		if (nd == m_iSource)
 		{
-			return path;
+			break;
 		}
 
 		path.push_front(nd);
+	}
+
+	for (auto& nodeIndex : path)
+	{
+		graph.GetNode(nodeIndex).SetIsOnShortestPath(true);
 	}
 
 	return path;

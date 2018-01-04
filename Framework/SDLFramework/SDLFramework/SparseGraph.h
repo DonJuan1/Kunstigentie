@@ -37,6 +37,11 @@ public:
 
 	std::vector<GraphEdge>& GetEdgesByNode(int idx);
 	
+	std::vector<GraphNode>& getNodes()
+	{
+		return nodes;
+	}
+
 	const std::vector<GraphNode>& getNodes() const
 	{
 		return nodes;
