@@ -25,6 +25,16 @@ public:
 		return timeAlive;
 	}
 
+	void setAlive(bool alive)
+	{
+		isAlive = alive;
+	}
+
+	bool getAlive()
+	{
+		return isAlive;
+	}
+
 	void tagNeighborBunnies(std::vector<Bunny*>& entities);
 
 	void draw() override;
@@ -33,6 +43,7 @@ public:
 private:
 	SteeringBehaviors* steering;
 
+	bool isAlive = true;
 	float timeAlive = 0.f;
 };
 

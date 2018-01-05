@@ -29,6 +29,26 @@ void Bunny::draw()
 
 void Bunny::update()
 {
+	int bunnyXPosition = static_cast<int>(position.x);
+	int bunnyYPosition = static_cast<int>(position.y);
+	Vector2D bunnyNodePosition = Vector2D(bunnyXPosition - bunnyXPosition % 20, bunnyYPosition - bunnyYPosition % 20);
+
+	GraphNode* node = graph->getNodesAtPosition(bunnyNodePosition);
+	if (node != nullptr && !node->IsWalkable())
+	{
+		isAlive = false;
+		return;
+	}
+
+	if (node != nullptr)
+	{
+		if (graph->GetNode(graph->getSheep()->getNodeIndex()).Pos().DistanceSq(node->Pos()) < 15 * 15)
+		{
+			isAlive = false;
+			return;
+		}
+	}
+
 	timeAlive += FWApplication::GetInstance()->GetDeltaTime();
 
 	Vector2D SteeringForce = steering->Calculate();

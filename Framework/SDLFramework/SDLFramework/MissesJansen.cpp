@@ -1,6 +1,7 @@
 #include "MissesJansen.h"
 #include "SparseGraph.h"
 #include "MissesJansenWanderState.h"
+#include "MissesJansenGlobalState.h"
 #include "RandomGenerator.h"
 
 MissesJansen::MissesJansen(int nodeIndex, SparseGraph* graph) : JansenEntity(nodeIndex, graph)
@@ -8,6 +9,8 @@ MissesJansen::MissesJansen(int nodeIndex, SparseGraph* graph) : JansenEntity(nod
 	stateMachine = new StateMachine<MissesJansen>(this);
 
 	stateMachine->SetCurrentState(MissesJansenWanderState::instance());
+	stateMachine->SetPreviousState(MissesJansenWanderState::instance());
+	stateMachine->SetGlobalState(MissesJansenGlobalState::instance());
 }
 
 MissesJansen::~MissesJansen()

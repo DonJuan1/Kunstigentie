@@ -107,7 +107,8 @@ void BunnyPopulation::update()
 {
 	for (auto& bunny : bunnies)
 	{
-		bunny->update();
+		if(bunny->getAlive())
+			bunny->update();
 	}
 }
 
@@ -115,6 +116,7 @@ void BunnyPopulation::draw()
 {
 	for (auto& bunny : bunnies)
 	{
-		bunny->draw();
+		if (bunny->getAlive())
+			bunny->draw();
 	}
 }

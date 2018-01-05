@@ -101,6 +101,15 @@
     <ClCompile Include="BunnyPopulation.cpp">
       <Filter>Genetic</Filter>
     </ClCompile>
+    <ClCompile Include="MissesJansenFrozenState.cpp">
+      <Filter>FSM\MissesJansen</Filter>
+    </ClCompile>
+    <ClCompile Include="MissesJansenGlobalState.cpp">
+      <Filter>FSM\MissesJansen</Filter>
+    </ClCompile>
+    <ClCompile Include="SheepHuntingState.cpp">
+      <Filter>FSM\Sheep</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL2.dll" />
@@ -198,6 +207,15 @@
     </ClInclude>
     <ClInclude Include="BunnyPopulation.h">
       <Filter>Genetic</Filter>
+    </ClInclude>
+    <ClInclude Include="MissesJansenFrozenState.h">
+      <Filter>FSM\MissesJansen</Filter>
+    </ClInclude>
+    <ClInclude Include="MissesJansenGlobalState.h">
+      <Filter>FSM\MissesJansen</Filter>
+    </ClInclude>
+    <ClInclude Include="SheepHuntingState.h">
+      <Filter>FSM\Sheep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

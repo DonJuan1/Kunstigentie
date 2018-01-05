@@ -51,7 +51,7 @@ public:
 
 	void ChangeState(State<entity_type>* pNewState)
 	{
-		if (currentState != pNewState)
+		if (pNewState != nullptr && currentState != pNewState)
 		{
 			previousState = currentState;
 

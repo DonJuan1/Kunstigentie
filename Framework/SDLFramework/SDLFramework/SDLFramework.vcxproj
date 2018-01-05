@@ -91,6 +91,8 @@
     <ClCompile Include="Graph_SearchAStar.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MissesJansen.cpp" />
+    <ClCompile Include="MissesJansenFrozenState.cpp" />
+    <ClCompile Include="MissesJansenGlobalState.cpp" />
     <ClCompile Include="MissesJansenWanderState.cpp" />
     <ClCompile Include="MisterJansen.cpp" />
     <ClCompile Include="MisterJansenTakePhotoState.cpp" />
@@ -98,6 +100,7 @@
     <ClCompile Include="RandomGenerator.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="SheepGlobalState.cpp" />
+    <ClCompile Include="SheepHuntingState.cpp" />
     <ClCompile Include="SheepSleepyState.cpp" />
     <ClCompile Include="SheepThirstyState.cpp" />
     <ClCompile Include="SheepWanderState.cpp" />
@@ -123,6 +126,8 @@
     <ClInclude Include="IndexedPriorityQLow.h" />
     <ClInclude Include="JansenEntity.h" />
     <ClInclude Include="MissesJansen.h" />
+    <ClInclude Include="MissesJansenFrozenState.h" />
+    <ClInclude Include="MissesJansenGlobalState.h" />
     <ClInclude Include="MissesJansenWanderState.h" />
     <ClInclude Include="MisterJansen.h" />
     <ClInclude Include="MisterJansenTakePhotoState.h" />
@@ -131,6 +136,7 @@
     <ClInclude Include="RandomGenerator.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="SheepGlobalState.h" />
+    <ClInclude Include="SheepHuntingState.h" />
     <ClInclude Include="SheepSleepyState.h" />
     <ClInclude Include="SheepThirstyState.h" />
     <ClInclude Include="SheepWanderState.h" />
