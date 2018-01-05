@@ -62,6 +62,11 @@ public:
 		return nodes;
 	}
 
+	std::vector<std::vector<GraphEdge>>& getEdges()
+	{
+		return edges;
+	}
+
 	const std::vector<std::vector<GraphEdge>>& getEdges() const
 	{
 		return edges;
@@ -105,6 +110,8 @@ public:
 
 	bool Load(const char* FileName);
 	bool Load(std::ifstream& stream);
+
+	void resetNodes();
 
 	BunnyPopulation* getBunnyPopulation()
 	{

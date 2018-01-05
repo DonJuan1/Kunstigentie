@@ -8,7 +8,6 @@
 #include "Heuristic_Euclid.h"
 #include "GraphEdge.h"
 #include "Heuristic_Euclid.h"
-#include "IndexedPriorityQLow.h"
 
 class Graph_SearchAStar
 {
@@ -24,7 +23,7 @@ private:
 
 	void Search();
 public:
-	std::vector<const GraphEdge*> searchedEdges;
+	std::vector<int> searchedNodes;
 
 	Graph_SearchAStar(SparseGraph& pGraph, int source, int target) :graph(pGraph),
 		m_ShortestPathTree(graph.NumNodes()),

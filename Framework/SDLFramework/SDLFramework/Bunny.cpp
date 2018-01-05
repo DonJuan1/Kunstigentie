@@ -49,7 +49,7 @@ void Bunny::update()
 		}
 	}
 
-	timeAlive += FWApplication::GetInstance()->GetDeltaTime();
+	timeAlive += FWApplication::GetInstance()->GetDeltaTime() / 1000;
 
 	Vector2D SteeringForce = steering->Calculate();
 

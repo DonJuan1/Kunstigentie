@@ -1,46 +1,41 @@
 #include "Graph_SearchAStar.h"
-
+#include <map>
+#include <queue>
+#include <functional>
 
 void Graph_SearchAStar::Search()
 {
-	for (auto& node : graph.getNodes())
-	{
-		node.SetIsOnShortestPath(false);
-	}
+	std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> pq;
 
-	IndexedPriorityQLow<double> pq(m_FCosts, graph.NumNodes());
+	pq.push(std::pair<float, int>(0,m_iSource));
 
-	pq.insert(m_iSource);
 
 	while (!pq.empty())
 	{
-		int NextClosestNode = pq.Pop();
+		int NextClosestNode = pq.top().second;
+		pq.pop();
 
 		m_ShortestPathTree[NextClosestNode] = m_SearchFrontier[NextClosestNode];
 
-		if (NextClosestNode == m_iTarget) return;
+		searchedNodes.push_back(NextClosestNode);
+
+		if (NextClosestNode == m_iTarget) break;
 
 		for (auto& pE : graph.GetEdgesByNode(NextClosestNode))
 		{
-			searchedEdges.push_back(&pE);
-
 			double HCost = Heuristic_Euclid::Calculate(graph, m_iTarget, pE.To());
 			double GCost = m_GCosts[NextClosestNode] + pE.Cost();
 
 			if (m_SearchFrontier[pE.To()] == nullptr)
 			{
-				m_FCosts[pE.To()] = GCost + HCost;
 				m_GCosts[pE.To()] = GCost;
-				pq.insert(pE.To());
+				pq.push(std::pair<float, int>(GCost + HCost, pE.To()));
 				m_SearchFrontier[pE.To()] = &pE;
 			}
 			else if (GCost < m_GCosts[pE.To()])
 			{
-				m_FCosts[pE.To()] = GCost + HCost;
 				m_GCosts[pE.To()] = GCost;
-				m_SearchFrontier[pE.To()] = &pE;
-				pq.ChangePriority(pE.To());
-				
+				m_SearchFrontier[pE.To()] = &pE;				
 			}
 		}
 	}
@@ -48,11 +43,6 @@ void Graph_SearchAStar::Search()
 
 std::list<int> Graph_SearchAStar::GetPathToTarget()const
 {
-	for (auto& node : graph.getNodes())
-	{
-		node.SetIsOnShortestPath(false);
-	}
-
 	std::list<int> path;
 
 	if (m_iTarget < 0)  return path;
@@ -76,6 +66,12 @@ std::list<int> Graph_SearchAStar::GetPathToTarget()const
 	for (auto& nodeIndex : path)
 	{
 		graph.GetNode(nodeIndex).SetIsOnShortestPath(true);
+	}
+
+
+	for (auto& nodeIndex : searchedNodes)
+	{
+		graph.GetNode(nodeIndex).SetIsSearched(true);
 	}
 
 	return path;

@@ -123,7 +123,6 @@
     <ClInclude Include="Graph_SearchAStar.h" />
     <ClInclude Include="Heuristic_Euclid.h" />
     <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="IndexedPriorityQLow.h" />
     <ClInclude Include="JansenEntity.h" />
     <ClInclude Include="MissesJansen.h" />
     <ClInclude Include="MissesJansenFrozenState.h" />

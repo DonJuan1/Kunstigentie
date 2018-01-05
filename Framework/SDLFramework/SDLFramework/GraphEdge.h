@@ -4,8 +4,8 @@ class GraphEdge
 {
 public:
 	GraphEdge(int from, int to, float cost) : cost(cost), from(from), to(to){}
-	GraphEdge(int from, int to) : cost(1.f), from(from), to(to){}
-	GraphEdge() : cost(1.f), from(-1), to(-1){}
+	GraphEdge(int from, int to) : cost(20.f), from(from), to(to){}
+	GraphEdge() : cost(20.f), from(-1), to(-1){}
 	
 	int From() const
 	{
@@ -37,6 +37,17 @@ public:
 		cost = newCost;
 	};
 
+	bool getVisited() const
+	{
+		return isVisited;
+	}
+
+	void setVisited(bool is)
+	{
+		isVisited = is;
+	}
+
+
 	bool operator==(const GraphEdge& rhs)
 	{
 		return rhs.from == this->from && rhs.to == this->to && rhs.cost == this->cost;
@@ -52,4 +63,5 @@ private:
 	int to;
 
 	float cost;
+	bool isVisited = false;
 };

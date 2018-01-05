@@ -64,16 +64,16 @@ Vector2D SteeringBehaviors::Wander()
 
 Vector2D SteeringBehaviors::NodeAvoidens()
 {
-	std::vector<Vector2D> directions =
+	std::vector<Vector2D> neighbors =
 	{
-		{0,   -20}, 
-		{20,  -20},
-		{20,  0},
-		{20,  20}, 
-		{0,   20},
-		{-20, 20},
-		{-20, 0}, 
-		{-20, -20} 
+		Vector2D{20,0},
+		Vector2D{20,20},
+		Vector2D{0,-20}, 
+		Vector2D{20,-20},
+		Vector2D{0,20},
+		Vector2D{-20,20},
+		Vector2D{-20,0},
+		Vector2D{-20,-20}
 	};
 
 	int bunnyXPosition = static_cast<int>(bunny->getPosition().x);
@@ -83,7 +83,7 @@ Vector2D SteeringBehaviors::NodeAvoidens()
 
 	Vector2D force;
 
-	for (auto& direction : directions)
+	for (auto& direction : neighbors)
 	{
 		Vector2D directionPosition = direction + bunnyNodePosition;
 		GraphNode* node = bunny->getGraph()->getNodesAtPosition(directionPosition);
@@ -183,8 +183,14 @@ Vector2D SteeringBehaviors::Calculate()
 	force += Vec2DNormalize(Wander()) * 2;
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 
-	force += Seek(bunny->getGraph()->GetNode(bunny->getGraph()->getSheep()->getNodeIndex()).Pos()) * bunny->getAttractionToSheep() * 0.01;
-	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
+	Vector2D pos = bunny->getGraph()->GetNode(bunny->getGraph()->getSheep()->getNodeIndex()).Pos();
+	int distance = bunny->getPosition().DistanceSq(pos);
+
+	if (distance < 200 * 200)
+	{
+		force += Seek(pos) * bunny->getAttractionToSheep() * 0.1f;
+		if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
+	}
 
 	force += NodeAvoidens() * bunny->getAttractionToWater();
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
@@ -200,19 +206,15 @@ bool SteeringBehaviors::AccumulateForce(Vector2D& steeringForce, Vector2D newFor
 
 	double magnitude_remaining = bunny->MaxForce() - magnitude_so_far;
 
-	//return false if there is no more force left to use
 	if (magnitude_remaining <= 0.0) return false;
 
-	//calculate the magnitude of the force we want to add
 	double magnitude_to_add = newForceToAdd.Length();
 
-	//now calculate how much of the force we can really add
 	if (magnitude_to_add > magnitude_remaining)
 	{
 		magnitude_to_add = magnitude_remaining;
 	}
 
-	//add it to the steering force
 	steeringForce += (Vec2DNormalize(newForceToAdd) * magnitude_to_add);
 
 	return true;

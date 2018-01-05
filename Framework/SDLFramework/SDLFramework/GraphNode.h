@@ -35,6 +35,12 @@ public:
 		isOnShortestPath = is;
 	}
 
+	void SetIsSearched(bool is)
+	{
+		isSearched = is;
+	}
+
+
 	bool IsWalkable()
 	{
 		return isWalkable;
@@ -45,6 +51,11 @@ public:
 		if (isOnShortestPath)
 		{
 			FWApplication::GetInstance()->SetColor(Color{0,0,0,255});
+			FWApplication::GetInstance()->DrawRect((int) position.x, (int) position.y, 20, 20, true);
+		}
+		else if (isSearched)
+		{
+			FWApplication::GetInstance()->SetColor(Color{255,255,255,255});
 			FWApplication::GetInstance()->DrawRect((int) position.x, (int) position.y, 20, 20, true);
 		}
 		else
@@ -61,6 +72,7 @@ private:
 	Color color;
 
 	bool isOnShortestPath = false;
+	bool isSearched = false;
 	bool isWalkable = false;
 };
 

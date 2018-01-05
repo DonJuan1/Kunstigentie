@@ -20,9 +20,14 @@ public:
 		delete steering;
 	}
 
-	float getTimeAlive()
+	float getTimeAlive() const
 	{
 		return timeAlive;
+	}
+
+	void resetTimeAlive()
+	{
+		timeAlive = 0.f;
 	}
 
 	void setAlive(bool alive)

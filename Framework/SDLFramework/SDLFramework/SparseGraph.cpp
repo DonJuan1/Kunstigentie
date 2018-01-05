@@ -1,4 +1,5 @@
 #include "SparseGraph.h"
+#include "Graph_SearchAStar.h"
 
 SparseGraph::SparseGraph(bool pDigraph) : nextNodeIndex(0), digraph(pDigraph)
 {}
@@ -191,9 +192,18 @@ bool SparseGraph::Load(std::ifstream& stream)
 	} while (std::getline(stream, line));
 
 	bunnyPopulation = new BunnyPopulation(this);
-	bunnyPopulation->generatePopulation();
+	bunnyPopulation->generateNewPopulation();
 
 	return true;
+}
+
+void SparseGraph::resetNodes()
+{
+	for (auto& node : getNodes())
+	{
+		node.SetIsOnShortestPath(false);
+		node.SetIsSearched(false);
+	}
 }
 
 void SparseGraph::draw()
@@ -205,15 +215,13 @@ void SparseGraph::draw()
 		node.draw();
 	}
 
-	FWApplication::GetInstance()->SetColor(Color(0, 0, 0, 255));
-
 	for (auto& edges : getEdges())
 	{
 		for (auto& edge : edges)
 		{
+			FWApplication::GetInstance()->SetColor(Color(0, 0, 0, 255));
 			FWApplication::GetInstance()->DrawLine(GetNode(edge.From()).Pos().x + 10, GetNode(edge.From()).Pos().y + 10, GetNode(edge.To()).Pos().x + 10, GetNode(edge.To()).Pos().y + 10);
 		}
-
 	}
 
 	misterJansen->draw();

@@ -10,6 +10,7 @@
 #include <time.h>
 #include "SparseGraph.h"
 #include "StatusBar.h"
+#include "Graph_SearchAStar.h"
 #include <ctime>
 
 
@@ -49,7 +50,7 @@ int main(int args[])
 				break;
 			}
 		}
-		
+
 		application->StartTick();
 		graph->update();
 
@@ -63,5 +64,5 @@ int main(int args[])
 		
 	delete graph;
 
-	return 0;
+	return _CrtDumpMemoryLeaks();
 }

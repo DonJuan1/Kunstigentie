@@ -17,6 +17,7 @@ private:
 	void generateNew(Bunny& bunny);
 	void createOffspring(Bunny& bunny1, Bunny& bunny2);
 
+	void thinningOut();
 	void crossOver(Bunny& newBunny, Bunny& bunny1, Bunny& bunny2);
 	void mutate(Bunny& bunny);
 
@@ -25,7 +26,8 @@ public:
 	~BunnyPopulation();
 
 	std::vector<Bunny*>& getBunnies();
-	void generatePopulation();
+	void generateNewPopulation();
+	void generateBetterPopulation();
 
 	void update();
 	void draw();

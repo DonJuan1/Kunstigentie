@@ -21,11 +21,12 @@ std::vector<Bunny*>& BunnyPopulation::getBunnies()
 	return bunnies;
 }
 
-void BunnyPopulation::generatePopulation()
+void BunnyPopulation::generateNewPopulation()
 {
-	GraphNode* node = nullptr;
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 100; i++)
 	{
+		GraphNode* node = nullptr;
+
 		while (node == nullptr || !node->IsWalkable())
 		{
 			int randomIndex = RandomGenerator::getInstance().generateInt(0, graph->NumNodes() - 1);
@@ -36,9 +37,43 @@ void BunnyPopulation::generatePopulation()
 		bunny->setPosition(node->Pos());
 		generateNew(*bunny);
 		bunnies.push_back(bunny);
-
-		node = nullptr;
 	}
+
+	generation++;
+}
+
+void BunnyPopulation::generateBetterPopulation()
+{
+	thinningOut();
+
+	int bunniesSize = static_cast<int>(bunnies.size());
+	for (int i = bunnies.size(); i < 100; i++)
+	{
+		Bunny* bunny1 = bunnies[RandomGenerator::getInstance().generateInt(0, bunniesSize - 1)];
+		Bunny* bunny2 = nullptr;
+
+		do
+		{
+			bunny2 = bunnies[RandomGenerator::getInstance().generateInt(0, bunniesSize-1)];
+		} while (bunny1 == bunny2);
+
+		createOffspring(*bunny1, *bunny2);
+	}
+
+	for (auto& bunny : bunnies)
+	{
+		GraphNode* node = nullptr;
+
+		while (node == nullptr || !node->IsWalkable())
+		{
+			int randomIndex = RandomGenerator::getInstance().generateInt(0, graph->NumNodes() - 1);
+			node = &graph->GetNode(randomIndex);
+		}
+
+		bunny->setPosition(node->Pos());	
+	}
+
+	generation++;
 }
 
 void BunnyPopulation::generateNew(Bunny & bunny)
@@ -55,7 +90,57 @@ void BunnyPopulation::createOffspring(Bunny & bunny1, Bunny & bunny2)
 	Bunny* bunny = new Bunny(graph);
 	crossOver(*bunny, bunny1, bunny2);
 	mutate(*bunny);
+
+	GraphNode* node = nullptr;
+	while (node == nullptr || !node->IsWalkable())
+	{
+		int randomIndex = RandomGenerator::getInstance().generateInt(0, graph->NumNodes() - 1);
+		node = &graph->GetNode(randomIndex);
+	}
+	bunny->setPosition(node->Pos());
+
 	bunnies.push_back(bunny);
+}
+
+void BunnyPopulation::thinningOut()
+{
+	std::vector<int> indexes;
+	std::vector<Bunny*> newBunnyVector;
+
+	std::sort(bunnies.begin(), bunnies.end(), [](Bunny* bunny1, Bunny* bunny2)
+	{
+		return (bunny1->getTimeAlive() > bunny2->getTimeAlive());
+	});
+
+	float currentIndex = 0;
+	while (currentIndex < static_cast<int>(bunnies.size() / 2))
+	{
+		float percentageBunny = currentIndex / static_cast<float>(bunnies.size()) * 100;
+		float randomInt = RandomGenerator::getInstance().generateInt(0, 100);
+
+		if (randomInt >= percentageBunny)
+		{
+			indexes.push_back(currentIndex);
+			delete bunnies[static_cast<int>(bunnies.size() - 1 - currentIndex)];
+		}
+		else
+		{
+			indexes.push_back(static_cast<int>(bunnies.size() - 1 - currentIndex));
+			delete bunnies[currentIndex];
+		}
+
+		currentIndex++;
+	}
+
+	for (auto& index : indexes)
+	{
+		bunnies[index]->resetTimeAlive();
+		bunnies[index]->setAlive(true);
+
+		newBunnyVector.push_back(bunnies[index]);
+	}
+
+	bunnies = newBunnyVector;
 }
 
 void BunnyPopulation::crossOver(Bunny& newBunny, Bunny& bunny1, Bunny & bunny2)
@@ -66,7 +151,6 @@ void BunnyPopulation::crossOver(Bunny& newBunny, Bunny& bunny1, Bunny & bunny2)
 
 	int splittingpoint = RandomGenerator::getInstance().generateInt(1, 4);
 
-
 	for (int i = 0; i < 5; i++)
 	{
 		if (i >= splittingpoint)
@@ -75,7 +159,7 @@ void BunnyPopulation::crossOver(Bunny& newBunny, Bunny& bunny1, Bunny & bunny2)
 		}
 		else
 		{
-			newChromosomes.push_back(bunny1Chromosomes[i]);
+			newChromosomes.push_back(bunny2Chromosomes[i]);
 		}
 	}
 

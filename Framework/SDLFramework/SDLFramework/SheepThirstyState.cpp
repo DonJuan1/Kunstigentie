@@ -38,12 +38,14 @@ void SheepThirstyState::execute(Sheep * sheep)
 
 		if (astar.GetPathToTarget().empty())
 		{
+			sheep->getGraph()->resetNodes();
 			sheep->setThirst(sheep->getThirst() - static_cast<int>(choosenJansen->giveWater()));
 			sheep->setDrinks(sheep->getDrinks() + 1);
 			sheep->getFSM()->ChangeState(SheepWanderState::instance());
 		}
 		else
 		{
+			sheep->getGraph()->resetNodes();
 			auto path = astar.GetPathToTarget();
 			sheep->setNodeIndex(path.front());
 		}

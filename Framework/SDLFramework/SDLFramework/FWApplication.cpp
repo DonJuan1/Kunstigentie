@@ -330,7 +330,7 @@ uint32_t FWApplication::GetTimeSinceStartedMS() const
 
 uint32_t FWApplication::GetDeltaTime() const
 {
-	return mDeltaTimeMS ;
+	return mDeltaTimeMS;
 }
 
 void FWApplication::DrawTextt(const std::string & message, uint32_t offsetX, uint32_t offsetY)

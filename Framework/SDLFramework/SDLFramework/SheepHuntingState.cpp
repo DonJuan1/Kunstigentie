@@ -13,7 +13,7 @@ SheepHuntingState* SheepHuntingState::instance()
 
 void SheepHuntingState::enter(Sheep *)
 {
-
+	time = 0;
 }
 
 void SheepHuntingState::execute(Sheep * sheep)
@@ -35,32 +35,42 @@ void SheepHuntingState::execute(Sheep * sheep)
 		}
 	}
 
-	if (closestBunny != nullptr && closestDistance < 50 * 50)
+	time += FWApplication::GetInstance()->GetDeltaTime();
+
+	if (time >= 250)
 	{
-		int bunnyXPosition = static_cast<int>(closestBunny->getPosition().x);
-		int bunnyYPosition = static_cast<int>(closestBunny->getPosition().y);
-		Vector2D bunnyNodePosition = Vector2D(bunnyXPosition - bunnyXPosition % 20, bunnyYPosition - bunnyYPosition % 20);
-
-		GraphNode* node = sheep->getGraph()->getNodesAtPosition(bunnyNodePosition);
-
-		if (node != nullptr)
+		if (closestBunny != nullptr && closestDistance < 50 * 50)
 		{
-			Graph_SearchAStar astar = Graph_SearchAStar(*sheep->getGraph(), sheep->getNodeIndex(), node->Index());
+			int bunnyXPosition = static_cast<int>(closestBunny->getPosition().x);
+			int bunnyYPosition = static_cast<int>(closestBunny->getPosition().y);
+			Vector2D bunnyNodePosition = Vector2D(bunnyXPosition - bunnyXPosition % 20, bunnyYPosition - bunnyYPosition % 20);
 
-			if (astar.GetPathToTarget().empty())
+			GraphNode* node = sheep->getGraph()->getNodesAtPosition(bunnyNodePosition);
+
+			if (node != nullptr)
 			{
-				sheep->getFSM()->SetCurrentState(SheepWanderState::instance());
-			}
-			else
-			{
-				auto path = astar.GetPathToTarget();
-				sheep->setNodeIndex(path.front());
+				Graph_SearchAStar astar = Graph_SearchAStar(*sheep->getGraph(), sheep->getNodeIndex(), node->Index());
+
+				if (astar.GetPathToTarget().empty())
+				{
+					sheep->getGraph()->resetNodes();
+					sheep->getFSM()->SetCurrentState(SheepWanderState::instance());
+				}
+				else
+				{
+					sheep->getGraph()->resetNodes();
+					auto path = astar.GetPathToTarget();
+					sheep->setNodeIndex(path.front());
+				}
 			}
 		}
-	}
-	else
-	{
-		sheep->getFSM()->SetCurrentState(SheepWanderState::instance());
+		else
+		{
+			sheep->getGraph()->resetNodes();
+			sheep->getFSM()->SetCurrentState(SheepWanderState::instance());
+		}
+
+		time = 0;
 	}
 }
 

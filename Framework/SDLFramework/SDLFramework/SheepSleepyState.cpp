@@ -25,12 +25,15 @@ void SheepSleepyState::execute(Sheep * sheep)
 
 		if (astar.GetPathToTarget().empty())
 		{
+			sheep->getGraph()->resetNodes();
 			sheep->setThirst(0);
 			sheep->setDrinks(0);
+			sheep->getGraph()->getBunnyPopulation()->generateBetterPopulation();
 			sheep->getFSM()->ChangeState(SheepWanderState::instance());
 		}
 		else
 		{
+			sheep->getGraph()->resetNodes();
 			auto path = astar.GetPathToTarget();
 			sheep->setNodeIndex(path.front());
 		}
