@@ -6,11 +6,20 @@
 
 class SparseGraph;
 
+struct GenerationDetails
+{
+	int generationNumber = 0;
+	int totalAlive = 0;
+};
+
 class BunnyPopulation
 {
 private:
 	std::vector<Bunny*> bunnies;
 	SparseGraph* graph;
+	
+	std::vector<GenerationDetails> generationDetails;
+	
 	int generation = 0;
 	int avarageTimeAlive = 0;
 
@@ -26,6 +35,7 @@ public:
 	~BunnyPopulation();
 
 	std::vector<Bunny*>& getBunnies();
+	std::vector<GenerationDetails>& getGenerationDetails();
 	void generateNewPopulation();
 	void generateBetterPopulation();
 

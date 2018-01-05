@@ -21,6 +21,11 @@ std::vector<Bunny*>& BunnyPopulation::getBunnies()
 	return bunnies;
 }
 
+std::vector<GenerationDetails>& BunnyPopulation::getGenerationDetails()
+{
+	return generationDetails;
+}
+
 void BunnyPopulation::generateNewPopulation()
 {
 	for (int i = 0; i < 100; i++)
@@ -44,6 +49,18 @@ void BunnyPopulation::generateNewPopulation()
 
 void BunnyPopulation::generateBetterPopulation()
 {
+	GenerationDetails gd;
+	gd.generationNumber = generation;
+	for (auto& bunny : bunnies)
+	{
+		if (bunny->getAlive())
+		{
+			gd.totalAlive++;
+		}
+	}
+
+	generationDetails.push_back(gd);
+
 	thinningOut();
 
 	int bunniesSize = static_cast<int>(bunnies.size());
@@ -134,7 +151,7 @@ void BunnyPopulation::thinningOut()
 
 	for (auto& index : indexes)
 	{
-		bunnies[index]->resetTimeAlive();
+		//bunnies[index]->resetTimeAlive();
 		bunnies[index]->setAlive(true);
 
 		newBunnyVector.push_back(bunnies[index]);

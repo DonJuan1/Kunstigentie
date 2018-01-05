@@ -27,15 +27,12 @@ int main(int args[])
 	
 	application->SetTargetFPS(60);
 	application->SetColor(Color(255, 10, 40, 255));
-	
+	application->gameSpeed = 1;
+
 	SparseGraph* graph = new SparseGraph{ false };
 	graph->Load("graph.txt");
 
-	StatusBar statusBar(1280, 0, 400, 720, Color(245, 245, 255,255));
-	statusBar.setMisterJansen(graph->getMisterJansen());
-	statusBar.setMissesJansen(graph->getMissesJansen());
-	statusBar.setSheep(graph->getSheep());
-
+	StatusBar statusBar(1280, 0, 400, 720, Color(245, 245, 255, 255), graph);
 	//while (true){}
 	while (application->IsRunning())
 	{

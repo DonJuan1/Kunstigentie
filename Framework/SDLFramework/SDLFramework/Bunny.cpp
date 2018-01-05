@@ -22,7 +22,7 @@ void Bunny::tagNeighborBunnies(std::vector<Bunny*>& entities)
 
 void Bunny::draw()
 {
-	FWApplication::GetInstance()->SetColor(Color(51, 51, 51, 255));
+	FWApplication::GetInstance()->SetColor(Color(117, 59, 11, 255));
 	FWApplication::GetInstance()->DrawRect((int)position.x - 2.5, (int)position.y - 2.5, 5, 5, true);
 	FWApplication::GetInstance()->DrawLine((int)position.x, (int) position.y, position.x + heading.x * 10 , position.y + heading.y * 10);
 }
@@ -49,7 +49,7 @@ void Bunny::update()
 		}
 	}
 
-	timeAlive += FWApplication::GetInstance()->GetDeltaTime() / 1000;
+	timeAlive += FWApplication::GetInstance()->GetDeltaTime();
 
 	Vector2D SteeringForce = steering->Calculate();
 

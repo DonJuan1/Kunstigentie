@@ -6,9 +6,9 @@
 void Graph_SearchAStar::Search()
 {
 	std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> pq;
+	std::map<int, float> queue;
 
 	pq.push(std::pair<float, int>(0,m_iSource));
-
 
 	while (!pq.empty())
 	{

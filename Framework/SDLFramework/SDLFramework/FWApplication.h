@@ -25,6 +25,8 @@ public:
 	FWApplication(int offsetX = 50, int offsetY = 50, int width = 800, int height = 600);
 	~FWApplication();
 
+	int gameSpeed = 1;
+
 	void SetTargetFPS(unsigned short target);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////

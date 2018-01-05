@@ -60,7 +60,11 @@ void SheepHuntingState::execute(Sheep * sheep)
 				{
 					sheep->getGraph()->resetNodes();
 					auto path = astar.GetPathToTarget();
-					sheep->setNodeIndex(path.front());
+
+					if (sheep->getGraph()->GetNode(path.front()).IsWalkable())
+					{
+						sheep->setNodeIndex(path.front());
+					}
 				}
 			}
 		}
