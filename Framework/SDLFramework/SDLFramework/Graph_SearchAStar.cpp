@@ -5,15 +5,23 @@
 
 void Graph_SearchAStar::Search()
 {
-	std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>, std::greater<std::pair<float, int>>> pq;
-	std::map<int, float> queue;
+	std::vector<int> indexes;
 
-	pq.push(std::pair<float, int>(0,m_iSource));
+	indexes.push_back(m_iSource);
 
-	while (!pq.empty())
+	while (!indexes.empty())
 	{
-		int NextClosestNode = pq.top().second;
-		pq.pop();
+		int NextClosestNode = indexes[0];
+		for (auto& index : indexes)
+		{
+			if (m_FCosts[index] <= m_FCosts[NextClosestNode])
+			{
+				NextClosestNode = index;
+			}
+		}
+
+		auto it = std::find(indexes.begin(), indexes.end(), NextClosestNode);
+		indexes.erase(it);
 
 		m_ShortestPathTree[NextClosestNode] = m_SearchFrontier[NextClosestNode];
 
@@ -28,12 +36,14 @@ void Graph_SearchAStar::Search()
 
 			if (m_SearchFrontier[pE.To()] == nullptr)
 			{
+				m_FCosts[pE.To()] = GCost + HCost;
 				m_GCosts[pE.To()] = GCost;
-				pq.push(std::pair<float, int>(GCost + HCost, pE.To()));
+				indexes.push_back(pE.To());
 				m_SearchFrontier[pE.To()] = &pE;
 			}
 			else if (GCost < m_GCosts[pE.To()])
 			{
+				m_FCosts[pE.To()] = GCost + HCost;
 				m_GCosts[pE.To()] = GCost;
 				m_SearchFrontier[pE.To()] = &pE;				
 			}
