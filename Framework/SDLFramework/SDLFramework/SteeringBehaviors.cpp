@@ -192,7 +192,7 @@ Vector2D SteeringBehaviors::Calculate()
 		if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 	}
 
-	force += NodeAvoidens() * bunny->getAttractionToWater();
+	force += NodeAvoidens() * bunny->getAttractionToWater() * 0.5f;
 	if (!AccumulateForce(SteeringForce, force)) return SteeringForce;
 
 	
