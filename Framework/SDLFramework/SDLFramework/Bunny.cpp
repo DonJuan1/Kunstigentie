@@ -34,15 +34,20 @@ void Bunny::update()
 	Vector2D bunnyNodePosition = Vector2D(bunnyXPosition - bunnyXPosition % 20, bunnyYPosition - bunnyYPosition % 20);
 
 	GraphNode* node = graph->getNodesAtPosition(bunnyNodePosition);
-	if (node != nullptr && !node->IsWalkable())
+	if (node == nullptr)
 	{
 		isAlive = false;
 		return;
 	}
-
-	if (node != nullptr)
+	else
 	{
 		if (graph->GetNode(graph->getSheep()->getNodeIndex()).Pos().DistanceSq(node->Pos()) < 15 * 15)
+		{
+			isAlive = false;
+			return;
+		}
+
+		if (!node->IsWalkable())
 		{
 			isAlive = false;
 			return;

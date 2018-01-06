@@ -208,8 +208,10 @@ void BunnyPopulation::update()
 {
 	for (auto& bunny : bunnies)
 	{
-		if(bunny->getAlive())
+		if (bunny->getAlive())
+		{
 			bunny->update();
+		}	
 	}
 }
 

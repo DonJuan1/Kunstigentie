@@ -61,5 +61,5 @@ int main(int args[])
 		
 	delete graph;
 
-	return _CrtDumpMemoryLeaks();
+	return 0;
 }

@@ -21,7 +21,7 @@ void SheepGlobalState::execute(Sheep* sheep)
 		return;
 	}
 
-	if (sheep->getThirst() >= 10)
+	if (sheep->getThirst() >= 100)
 	{
 		sheep->getFSM()->ChangeState(SheepThirstyState::instance());
 	}

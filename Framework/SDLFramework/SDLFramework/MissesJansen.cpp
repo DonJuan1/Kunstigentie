@@ -25,7 +25,7 @@ StateMachine<MissesJansen>* MissesJansen::getFSM() const
 
 float MissesJansen::giveWater()
 {
-	int waterAmount = RandomGenerator::getInstance().generateInt(1, 8);
+	int waterAmount = RandomGenerator::getInstance().generateInt(10, 80);
 
 	timesWaterGiven++;
 	waterGiven += waterAmount;

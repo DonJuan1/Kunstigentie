@@ -17,8 +17,8 @@ protected:
 	bool tag;
 
 	float mass = 0.1f;
-	float maxSpeed = 100.f;
-	float maxForce = 800.f;
+	float maxSpeed = 150.f;
+	float maxForce = 100.f;
 	float collisionRadius = 3.f;
 
 	float attractionToScheep = 1;
